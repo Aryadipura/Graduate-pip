@@ -123,59 +123,26 @@ MiniStar.prototype.update = function() {
     this.opacity -= 0.0001 * this.ttl
 }
 
-function creatMountainRange(mountainAmount, height, color){
-    for(let i = 0; i < mountainAmount; i++){
-        const mountainWidth = canvas.width / mountainAmount
-        c.beginPath()
-        c.moveTo(i * mountainWidth, canvas.height)
-        c.lineTo(i * mountainWidth + mountainWidth + 0.2*canvas.height, canvas.height)
-        c.lineTo(i * mountainWidth + mountainWidth / 2, canvas.height - height)
-        c.lineTo(i * mountainWidth - 0.2*canvas.height, canvas.height)
-        c.fillStyle = color
-        c.fill()
-        c.closePath()
-    }
-}
-
 // Implementation
-const backgroundGradient = c.createLinearGradient(0, 0, canvas.width, canvas.height)
-backgroundGradient.addColorStop(0, '#171e26')
-backgroundGradient.addColorStop(1, '#3f586b')
+const backgroundColor = '#050505'
 
 let stars
 let miniStars
-let backgroundStars
 let ticker = 0
-let randomSpawnRate = 75
+let randomSpawnRate = 320
 const groundHeight = 0.09 * canvas.height
 let inf = 1e9
 function init() {
     stars = []
     miniStars = []
-    backgroundStars = []
-   
-    for(let i = 0; i < 200; i++){
-        const x = Math.random() * canvas.width
-        const y = Math.random() * canvas.height
-        const radius = Math.random() * 3
-        backgroundStars.push(new Star(x, y, radius, 'white'))
-    }
 }
 
 // Animation Loop
 function animate() {
-    c.clearRect(0, 0, 0, canvas.height)
-    c.fillStyle = backgroundGradient
+    c.clearRect(0, 0, canvas.width, canvas.height)
+    c.fillStyle = backgroundColor
     c.fillRect(0, 0, canvas.width, canvas.height)
-
-    backgroundStars.forEach(backgroundStar => {
-        backgroundStar.draw()
-    })
-
-    if(flag) creatMountainRange(1, canvas.height * 0.7, '#384551')
-    if(flag) creatMountainRange(2, canvas.height * 0.6, '#2B3843')
-    if(flag) creatMountainRange(3, canvas.height * 0.4, '#26333E')
-    c.fillStyle = '#182028'
+    c.fillStyle = '#050505'
     c.fillRect(0, canvas.height - groundHeight, canvas.width, groundHeight)
     stars.forEach((star, index) => {
         star.update();
@@ -199,7 +166,7 @@ function animate() {
         const radius = 9
         const x = Math.max(radius, Math.random() * canvas.width - radius)
         stars.push(new Star(x, -100, 9, '#E3EAEF'))
-        randomSpawnRate = Math.floor(Math.random() * (200 - 125 + 1) + 125)
+        randomSpawnRate = Math.floor(Math.random() * (500 - 260 + 1) + 260)
     }
 
     requestAnimationFrame(animate)

@@ -1,8 +1,4 @@
 
-var btn = document.getElementById("heartTxt");
-btn.style.opacity = 0;
-var btnVal = 0;
-
 function showImage(){
 	//document.getElementById("imgTxt").style.opacity = 0;
 	myImage.setAttribute("src", imageArray[imageIndex]);
@@ -41,28 +37,12 @@ function preshowImage(){
 	}
 }
 
-function buttonFadeIn(){
-	if(btnVal < 1){
-		btnVal += 0.025;
-		btn.style.opacity = btnVal;
-	}
-	else{
-		clearInterval(buttonInterval);
-		if(ok == 3){
-			ok += 1;
-		}
-	}
-}
-
-
-
 function event(){
 
 	showImageInterval = setInterval(preshowImage, 100);
 
 	imgInterval = setInterval(function (){
 		if(ok == 3){
-			setTimeout(function(){buttonInterval = setInterval(buttonFadeIn, 50);}, 1500);
 			clearInterval(imgInterval);
 		}
 	}, 50);
@@ -70,6 +50,5 @@ function event(){
 
 var showImageInterval;
 var imgInterval;
-var buttonInterval;
 
 event();
