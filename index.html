@@ -8,10 +8,11 @@
 	</head>
 
 	<body style="margin:0px">
-		<audio autoplay loop>
+		<audio id="bgMusic" loop>
 			<source src="music/music.mp3" type="audio/mpeg">
 			Your browser does not support the audio.
 		</audio>
+		<button id="musicPlayButton" aria-label="Play background music">🎵</button>
 		<canvas></canvas>
 		<div id="imgTxt">
 			<span id="Txt"></span> <br />
@@ -95,5 +96,25 @@
 		<script type="text/javascript" src="./js/stars.js"></script>
 		<script type="text/javascript" src="./js/typeWriter.js"></script>
 		<script type="text/javascript" src="./js/playImg.js"></script>
+		<script>
+			const musicButton = document.getElementById('musicPlayButton');
+			const bgMusic = document.getElementById('bgMusic');
+
+			function tryPlayMusic() {
+				if (!bgMusic) {
+					return;
+				}
+
+				bgMusic.play()
+					.then(() => {
+						musicButton.classList.add('hidden');
+					})
+					.catch(() => {
+						musicButton.classList.add('error');
+					});
+			}
+
+			musicButton.addEventListener('click', tryPlayMusic);
+		</script>
 	</body>
 </html>
